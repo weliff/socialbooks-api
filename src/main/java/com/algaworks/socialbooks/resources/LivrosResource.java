@@ -2,8 +2,10 @@ package com.algaworks.socialbooks.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +41,8 @@ public class LivrosResource {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id){
 		Livro livro = livrosService.buscar(id);
-		return ResponseEntity.ok(livro);
+		CacheControl cache = CacheControl.maxAge(60, TimeUnit.SECONDS);
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cache).body(livro);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
