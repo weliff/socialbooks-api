@@ -23,15 +23,19 @@ public class Autor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
 	@NotEmpty(message="Nome não pode ser vazio.")
 	private String nome;
+	
 	@JsonInclude(Include.NON_NULL)
 	@JsonFormat(pattern="dd/MM/yyyy")
 	@NotNull(message="O campo data de nascimento deve ser informado.")
 	private Date dataNascimento;
+	
 	@JsonInclude(Include.NON_NULL)
 	@NotNull(message="O campo nacionalidade é de preenchimedo obrigatório.")
 	private String nacionalidade;
+	
 	@OneToMany(mappedBy="autor")
 	@JsonIgnore
 	private List<Livro> livros;

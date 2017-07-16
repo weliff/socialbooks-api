@@ -35,6 +35,18 @@ public class LivrosResource {
 		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, params = "embed=autor")
+    @CrossOrigin
+    public ResponseEntity<List<Livro>> listarComAutor() {
+        return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
+    }
+	
+	@RequestMapping(method=RequestMethod.GET, params = "embed=autor.nome,comentarios.texto")
+    @CrossOrigin
+    public ResponseEntity<List<Livro>> listarComAutorNomeEComentarios() {
+        return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
+    }
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@RequestBody Livro livro) {
 		livro = livrosService.salvar(livro);

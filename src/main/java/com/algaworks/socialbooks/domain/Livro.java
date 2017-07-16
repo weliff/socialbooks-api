@@ -23,19 +23,25 @@ public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@JsonInclude(Include.NON_NULL)
 	@NotNull(message="O campo nomde deve ser informado.")
 	private String nome;
+	
 	@JsonInclude(Include.NON_NULL)
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date publicacao;
+
 	@JsonInclude(Include.NON_NULL)
 	private String editora;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String resumo;
+	
 	@JsonInclude(Include.NON_EMPTY)
 	@OneToMany(mappedBy="livro")
 	private List<Comentario> comentarios;
+	
 	@ManyToOne
 	@JoinColumn(name="AUTOR_ID")
 	@JsonInclude(Include.NON_NULL)
