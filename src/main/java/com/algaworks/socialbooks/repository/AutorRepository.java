@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.algaworks.socialbooks.domain.Autor;
 
 public interface AutorRepository extends JpaRepository<Autor, Long>{
+    
+    Autor findByNome(String nome);
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.socialbooks.domain.Comentario;
 import com.algaworks.socialbooks.domain.Livro;
@@ -34,9 +35,15 @@ public class LivrosService {
 		return livro;
 	}
 	
+	@Transactional
 	public Livro salvar(Livro livro) {
 		livro = new Livro(livro, null);
-		return livrosRepository.save(livro);
+		livrosRepository.save(livro);
+//		try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//        }
+		return livro;
 	}
 	
 	public void deletar(Long id) {

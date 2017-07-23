@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.algaworks.socialbooks.domain.Autor;
 import com.algaworks.socialbooks.service.AutoresService;
 
+import reactor.core.publisher.Flux;
+
 @RestController
 @RequestMapping("/autores")
 public class AutoresResource {
@@ -26,9 +28,9 @@ public class AutoresResource {
 	private AutoresService autoresService;
 	
 	@RequestMapping(method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Autor>> listar() {
+	public Flux<List<Autor>> listar() {
 		List<Autor> autores = autoresService.listar();
-		return ResponseEntity.ok(autores);
+		return Flux.just(autores);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
